@@ -5,70 +5,70 @@
       "question": "What will be the output of the following code snippet?",
       "code": "console.log(typeof NaN);",
       "answers": ["number", "NaN", "string", "undefined"],
-      "correct_answer": 0
+      "correctAnswer": 0
     },
     {
       "id": 2,
       "question": "What does the '===' operator do in JavaScript?",
       "code": "var x = 5;\nvar y = '5';\nconsole.log(x === y);",
       "answers": ["Checks for value equality without type coercion", "Checks for value equality with type coercion", "Assigns value", "None of the above"],
-      "correct_answer": 0
+      "correctAnswer": 0
     },
     {
       "id": 3,
       "question": "What will be the output of the following code snippet?",
       "code": "console.log(1 + '1');",
       "answers": ["'11'", "2", "'2'", "11"],
-      "correct_answer": 0
+      "correctAnswer": 0
     },
     {
       "id": 4,
       "question": "What does the 'typeof' operator return for the 'null' value?",
       "code": "console.log(typeof null);",
       "answers": ["'object'", "'null'", "'undefined'", "'string'"],
-      "correct_answer": 0
+      "correctAnswer": 0
     },
     {
       "id": 5,
       "question": "What is the result of the following code snippet?",
       "code": "var a = [1, 2, 3];\nconsole.log(a[6]);",
       "answers": ["undefined", "null", "0", "Throws an error"],
-      "correct_answer": 0
+      "correctAnswer": 0
     },
     {
       "id": 6,
       "question": "What will be the output of the following code?",
       "code": "console.log(1 + 2 + '3' + 4 + 5);",
-      "answers": ["'33'", "'15'", "'12345'", "Error"],
-      "correct_answer": 2
+      "answers": ["'33'", "'15'", "'3345'", "Error"],
+      "correctAnswer": 2
     },
     {
       "id": 7,
       "question": "What will the code below output to the console?",
       "code": "var x = 0;\nfunction foo() {\n  console.log(x);\n  var x = 1;\n}\nfoo();",
       "answers": ["1", "0", "undefined", "ReferenceError"],
-      "correct_answer": 2
+      "correctAnswer": 2
     },
     {
       "id": 8,
       "question": "What is the output of the following code?",
       "code": "console.log(2 + '2' - 2);",
       "answers": ["20", "NaN", "22", "2"],
-      "correct_answer": 3
+      "correctAnswer": 0
     },
     {
       "id": 9,
       "question": "What does the following JavaScript code return?",
       "code": "console.log('apple' > 'pineapple');",
       "answers": ["true", "false", "NaN", "undefined"],
-      "correct_answer": 1
+      "correctAnswer": 1
     },
     {
       "id": 10,
       "question": "What is the output of the following code snippet?",
       "code": "var y = 1;\nif (function f() {}) {\n  y += typeof f;\n}\nconsole.log(y);",
       "answers": ["1undefined", "1object", "1function", "1NaN"],
-      "correct_answer": 2
+      "correctAnswer": 2
     }
   ]
 }

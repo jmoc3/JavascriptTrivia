@@ -4,12 +4,30 @@ import { Card } from "@nextui-org/react"
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { hybrid } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import {Listbox, ListboxItem} from "@nextui-org/react";
-import { useState, useMemo } from "react";
+
+
+const getBgColor = (info:QuestionType, index:number) => {
+
+  const correct = '#095028'
+  const incorrect = '#610726'
+  const none = 'transparent'
+    
+  if(info.userSelectedAnswer==undefined) return none 
+  if(index!=info.correctAnswer && index!=info.userSelectedAnswer) return none
+  if(info.correctAnswer===index) return correct
+  if(info.userSelectedAnswer===index) return incorrect
+
+}
 
 
 const Question = ({info}:{info:QuestionType}) => {
 
-  const [selectedKeys, setSelectedKeys] = useState(new Set([]));
+  const { selectAnswer, check, setCheck } = useQuestionStore()
+
+  const handler = (index:number) => () => {
+    selectAnswer(info.id,index)
+    setCheck(info.answers[info.correctAnswer])
+  }
 
   return (
     <Card className="p-8 gap-8">
@@ -23,14 +41,14 @@ const Question = ({info}:{info:QuestionType}) => {
         <Listbox 
           aria-label="Single selection example"
           variant="bordered"
-          color="warning"
           disallowEmptySelection
           selectionMode="single"
-          selectedKeys={selectedKeys}
-          onSelectionChange={setSelectedKeys}
+          color="warning"
+          selectedKeys={check}
         >
-          {info.answers.map(e=>(
-            <ListboxItem key={`${e}`}>{e}</ListboxItem>
+          {info.answers.map((element,index)=>(
+            <ListboxItem key={`${element}`}
+              onClick={handler(index)} style={{backgroundColor:getBgColor(info,index)}}isDisabled={info.userSelectedAnswer!=null} className="transition">{element}</ListboxItem>
           ))}
         </Listbox>
       </div>
