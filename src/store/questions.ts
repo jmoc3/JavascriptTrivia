@@ -11,7 +11,8 @@ type State = {
 type Actions = {
   fetchQuestions: (limit:number) => void,
   selectAnswer: (questionId:number,answerIndex:number)=>void
-  setCheck: (value:string) => void
+  setCheck: (value:string) => void,
+  goNextQuestion: ()=>void
 }
 
 export const useQuestionStore = create<State & Actions>((set,get)=>({
@@ -40,8 +41,13 @@ export const useQuestionStore = create<State & Actions>((set,get)=>({
 
     set({questions:newQuestions})    
   },
-  setCheck: (value:string) => {
-    const {check} = get()
-    set({check:[value]})
+  setCheck: (value:string) => set({check:[value]}),
+  goNextQuestion: () => {
+    const {currentQuestion, questions} = get()
+    const nextQuestion = currentQuestion + 1
+
+    if (nextQuestion > questions.length) return
+
+    set({currentQuestion:nextQuestion})
   } 
 }))  
