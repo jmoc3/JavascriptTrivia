@@ -6,6 +6,6 @@ import {Button} from "@nextui-org/react";
 export const ButtonStart = ():JSX.Element => {
   const {fetchQuestions} = useQuestionStore()
   return (
-    <Button className='bg-red-500' onClick={()=>fetchQuestions(5)} >Empezar!</Button>
+    <Button className='bg-red-500' onClick={()=>fetchQuestions(10)} >Empezar!</Button>
   )
 }

@@ -12,7 +12,7 @@ type Actions = {
   fetchQuestions: (limit:number) => void,
   selectAnswer: (questionId:number,answerIndex:number)=>void
   setCheck: (value:string) => void,
-  goNextQuestion: ()=>void
+  goNextQuestion: ()=>void,
 }
 
 export const useQuestionStore = create<State & Actions>((set,get)=>({
@@ -23,7 +23,7 @@ export const useQuestionStore = create<State & Actions>((set,get)=>({
   fetchQuestions: async(limit:number) => {
     const res = await (await fetch('http://localhost:3000/data.json')).json()   
     const questions = res.questions.sort(()=>Math.random() - .5).slice(0,limit)
-    set({questions})
+    set({questions,currentQuestion:0})
   },
   selectAnswer: (questionId:number,answerIndex:number) => {
     const {questions} = get()
@@ -45,9 +45,9 @@ export const useQuestionStore = create<State & Actions>((set,get)=>({
   goNextQuestion: () => {
     const {currentQuestion, questions} = get()
     const nextQuestion = currentQuestion + 1
-
-    if (nextQuestion > questions.length) return
+    console.log(nextQuestion)
+    if (nextQuestion == questions.length) return
 
     set({currentQuestion:nextQuestion})
-  } 
+  }
 }))  

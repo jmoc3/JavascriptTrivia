@@ -1,9 +1,10 @@
 import { useQuestionStore } from "@/store/questions"
 import type { Question as QuestionType } from "@/types"
-import { Card } from "@nextui-org/react"
+import { Card, Listbox, ListboxItem, Button } from "@nextui-org/react"
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { hybrid } from 'react-syntax-highlighter/dist/esm/styles/hljs'
-import {Listbox, ListboxItem} from "@nextui-org/react";
+import { GoChevronRight } from "react-icons/go";
+
 
 
 const getBgColor = (info:QuestionType, index:number) => {
@@ -22,13 +23,25 @@ const getBgColor = (info:QuestionType, index:number) => {
 
 const Question = ({info}:{info:QuestionType}) => {
 
-  const { selectAnswer, check, setCheck } = useQuestionStore()
+  const { questions, 
+          currentQuestion,
+          check, 
+          selectAnswer, 
+          setCheck,
+          goNextQuestion,
+          fetchQuestions,
+          } = useQuestionStore()
 
   const handler = (index:number) => () => {
     selectAnswer(info.id,index)
     setCheck(info.answers[info.correctAnswer])
   }
 
+  const nextHandler = () => { if(info.userSelectedAnswer!=undefined) goNextQuestion() }
+  const resetHandler = () => {
+    fetchQuestions(10)
+    setCheck('')
+  }
   return (
     <Card className="p-8 gap-8">
 
@@ -48,9 +61,22 @@ const Question = ({info}:{info:QuestionType}) => {
         >
           {info.answers.map((element,index)=>(
             <ListboxItem key={`${element}`}
-              onClick={handler(index)} style={{backgroundColor:getBgColor(info,index)}}isDisabled={info.userSelectedAnswer!=null} className="transition">{element}</ListboxItem>
+              onClick={handler(index)} 
+              style={{backgroundColor:getBgColor(info,index)}} 
+              isDisabled={info.userSelectedAnswer!=null} 
+              className="transition">{element}</ListboxItem>
           ))}
         </Listbox>
+      </div>
+      <div className="footer flex justify-between px-2 ">
+        <span className="select-none">{currentQuestion + 1}/{questions.length}</span>
+        
+        <div className="buttons flex items-center space-x-4">
+          <Button color="warning" variant="flat" onClick={resetHandler}>Restart</Button>  
+          <Button isIconOnly color="danger" variant="flat" onClick={nextHandler}>
+            <GoChevronRight />
+          </Button>    
+        </div>
       </div>
 
     </Card>
