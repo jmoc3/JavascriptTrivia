@@ -1,11 +1,12 @@
 import { create } from "zustand";
 import type { Question } from "../types";
-
+import { persist } from "zustand/middleware";
+import { accordion } from "@nextui-org/react";
 
 type State = {
   questions: Question[],
   currentQuestion: number,
-  check:string[]
+  check:string[],
 }
 
 type Actions = {
@@ -15,7 +16,7 @@ type Actions = {
   goNextQuestion: ()=>void,
 }
 
-export const useQuestionStore = create<State & Actions>((set,get)=>({
+export const useQuestionStore = create<State & Actions>()(persist((set,get)=>({
   questions: [],
   currentQuestion: 0,
   userSelect:[],
@@ -45,9 +46,12 @@ export const useQuestionStore = create<State & Actions>((set,get)=>({
   goNextQuestion: () => {
     const {currentQuestion, questions} = get()
     const nextQuestion = currentQuestion + 1
-    console.log(nextQuestion)
+    
     if (nextQuestion == questions.length) return
 
     set({currentQuestion:nextQuestion})
   }
-}))  
+  }), {
+  name:'questions'
+  }
+))  

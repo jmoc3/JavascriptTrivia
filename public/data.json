@@ -5,70 +5,80 @@
       "question": "What will be the output of the following code snippet?",
       "code": "console.log(typeof NaN);",
       "answers": ["number", "NaN", "string", "undefined"],
-      "correctAnswer": 0
+      "correctAnswer": 0,
+      "explanation": "The result of `typeof NaN` is 'number' because NaN (Not a Number) is a special numeric value in JavaScript."
     },
     {
       "id": 2,
       "question": "What does the '===' operator do in JavaScript?",
       "code": "var x = 5;\nvar y = '5';\nconsole.log(x === y);",
       "answers": ["Checks for value equality without type coercion", "Checks for value equality with type coercion", "Assigns value", "None of the above"],
-      "correctAnswer": 0
+      "correctAnswer": 0,
+      "explanation": "The '===' operator in JavaScript checks for value equality without type coercion, so comparing 5 (number) with '5' (string) using '===' will result in false."
     },
     {
       "id": 3,
       "question": "What will be the output of the following code snippet?",
       "code": "console.log(1 + '1');",
       "answers": ["'11'", "2", "'2'", "11"],
-      "correctAnswer": 0
+      "correctAnswer": 0,
+      "explanation": "Concatenating a string with a number in JavaScript results in a string, so the result of `1 + '1'` is '11'."
     },
     {
       "id": 4,
       "question": "What does the 'typeof' operator return for the 'null' value?",
       "code": "console.log(typeof null);",
       "answers": ["'object'", "'null'", "'undefined'", "'string'"],
-      "correctAnswer": 0
+      "correctAnswer": 0,
+      "explanation": "The 'typeof' operator returns 'object' for the 'null' value in JavaScript, which is a historical design error in the language."
     },
     {
       "id": 5,
       "question": "What is the result of the following code snippet?",
       "code": "var a = [1, 2, 3];\nconsole.log(a[6]);",
       "answers": ["undefined", "null", "0", "Throws an error"],
-      "correctAnswer": 0
+      "correctAnswer": 0,
+      "explanation": "If you try to access an index outside the range of an array in JavaScript, 'undefined' is returned."
     },
     {
       "id": 6,
       "question": "What will be the output of the following code?",
       "code": "console.log(1 + 2 + '3' + 4 + 5);",
       "answers": ["'33'", "'15'", "'3345'", "Error"],
-      "correctAnswer": 2
+      "correctAnswer": 2,
+      "explanation": "Concatenation in JavaScript follows the left-to-right order, so the values will be concatenated in the order they appear. Therefore, the result will be '3345'."
     },
     {
       "id": 7,
       "question": "What will the code below output to the console?",
       "code": "var x = 0;\nfunction foo() {\n  console.log(x);\n  var x = 1;\n}\nfoo();",
       "answers": ["1", "0", "undefined", "ReferenceError"],
-      "correctAnswer": 2
+      "correctAnswer": 2,
+      "explanation": "Due to hoisting in JavaScript, the declaration of the variable `x` inside the function `foo` is hoisted to the top of the function, but its initialization happens in its original place. Therefore, `console.log(x)` inside the function prints 'undefined'."
     },
     {
       "id": 8,
       "question": "What is the output of the following code?",
       "code": "console.log(2 + '2' - 2);",
       "answers": ["20", "NaN", "22", "2"],
-      "correctAnswer": 0
+      "correctAnswer": 0,
+      "explanation": "In JavaScript, when you try to subtract a number from a string, the string is converted to a number, so '2' - 2 results in 0. The concatenation of '2' and 0 results in '20'."
     },
     {
       "id": 9,
       "question": "What does the following JavaScript code return?",
       "code": "console.log('apple' > 'pineapple');",
       "answers": ["true", "false", "NaN", "undefined"],
-      "correctAnswer": 1
+      "correctAnswer": 1,
+      "explanation": "In JavaScript, string comparisons are done using their Unicode code points. 'a' has a lower Unicode code point than 'p', so 'apple' is less than 'pineapple', resulting in false."
     },
     {
       "id": 10,
       "question": "What is the output of the following code snippet?",
       "code": "var y = 1;\nif (function f() {}) {\n  y += typeof f;\n}\nconsole.log(y);",
       "answers": ["1undefined", "1object", "1function", "1NaN"],
-      "correctAnswer": 2
+      "correctAnswer": 2,
+      "explanation": "The function `f` is defined within the context of the `if` condition, so it is truthy. Therefore, inside the `if` block, `typeof f` is 'function', and `y += typeof f` results in '1function'."
     }
   ]
 }

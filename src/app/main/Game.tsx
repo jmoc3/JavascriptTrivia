@@ -3,9 +3,8 @@ import type { Question as QuestionType } from "@/types"
 import { Card, Listbox, ListboxItem, Button } from "@nextui-org/react"
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { hybrid } from 'react-syntax-highlighter/dist/esm/styles/hljs'
-import { GoChevronRight } from "react-icons/go";
-
-
+import { GoChevronRight, GoCheck  } from "react-icons/go";
+import {ExplanationComponent} from './Explanation'
 
 const getBgColor = (info:QuestionType, index:number) => {
 
@@ -19,7 +18,6 @@ const getBgColor = (info:QuestionType, index:number) => {
   if(info.userSelectedAnswer===index) return incorrect
 
 }
-
 
 const Question = ({info}:{info:QuestionType}) => {
 
@@ -37,13 +35,16 @@ const Question = ({info}:{info:QuestionType}) => {
     setCheck(info.answers[info.correctAnswer])
   }
 
-  const nextHandler = () => { if(info.userSelectedAnswer!=undefined) goNextQuestion() }
+  const nextHandler = () => { 
+    if(info.userSelectedAnswer!=undefined) goNextQuestion() 
+  }
   const resetHandler = () => {
     fetchQuestions(10)
     setCheck('')
   }
+
   return (
-    <Card className="p-8 gap-8">
+    <Card className="p-8 gap-8 w-[90%]">
 
       <h5>{info.question}</h5>
       <SyntaxHighlighter language="javascipt" style={hybrid} className='rounded '>
@@ -54,17 +55,18 @@ const Question = ({info}:{info:QuestionType}) => {
         <Listbox 
           aria-label="Single selection example"
           variant="bordered"
-          disallowEmptySelection
-          selectionMode="single"
-          color="warning"
           selectedKeys={check}
         >
           {info.answers.map((element,index)=>(
             <ListboxItem key={`${element}`}
+              color="warning"
               onClick={handler(index)} 
               style={{backgroundColor:getBgColor(info,index)}} 
               isDisabled={info.userSelectedAnswer!=null} 
-              className="transition">{element}</ListboxItem>
+              endContent={<GoCheck className={`${info.userSelectedAnswer!=undefined && info.correctAnswer==index ? 'block':'hidden'} relative`}/>}
+              className="transition select-none">{element}
+
+            </ListboxItem>
           ))}
         </Listbox>
       </div>
@@ -84,11 +86,13 @@ const Question = ({info}:{info:QuestionType}) => {
 }
 
 export const Game = () => {
-  const {questions, currentQuestion} = useQuestionStore()
+  const {questions, currentQuestion } = useQuestionStore()
   const questionInfo = questions[currentQuestion]
+  
   return (
-    <>
+    <div className="flex w-3/4 gap-[5rem]"> 
       <Question info={questionInfo}/>
-    </>
+      <ExplanationComponent info={questionInfo} />      
+    </div>
   )
 }
