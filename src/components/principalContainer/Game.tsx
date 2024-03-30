@@ -5,19 +5,7 @@ import SyntaxHighlighter from 'react-syntax-highlighter'
 import { hybrid } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import { GoChevronRight, GoCheck  } from "react-icons/go";
 import {ExplanationComponent} from './Explanation'
-
-const getBgColor = (info:QuestionType, index:number) => {
-
-  const correct = '#095028'
-  const incorrect = '#610726'
-  const none = 'transparent'
-    
-  if(info.userSelectedAnswer==undefined) return none 
-  if(index!=info.correctAnswer && index!=info.userSelectedAnswer) return none
-  if(info.correctAnswer===index) return correct
-  if(info.userSelectedAnswer===index) return incorrect
-
-}
+import { getBgColor } from "@/services/getBgColor"
 
 const Question = ({info}:{info:QuestionType}) => {
 

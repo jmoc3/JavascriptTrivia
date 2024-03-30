@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import type { Question } from "../types";
 import { persist } from "zustand/middleware";
-import { accordion } from "@nextui-org/react";
 
 type State = {
   questions: Question[],
@@ -22,7 +21,7 @@ export const useQuestionStore = create<State & Actions>()(persist((set,get)=>({
   userSelect:[],
   check:[''],
   fetchQuestions: async(limit:number) => {
-    const res = await (await fetch('http://localhost:3000/data.json')).json()   
+    const res = await (await fetch('/data.json')).json()   
     const questions = res.questions.sort(()=>Math.random() - .5).slice(0,limit)
     set({questions,currentQuestion:0})
   },

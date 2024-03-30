@@ -16,6 +16,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning={true}>
+      <link rel="shortcut icon" href="/Logo.png" />
+      <title>Triviajs</title>
       <body className={inter.className}>{children}</body>
     </html>
   );

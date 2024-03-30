@@ -1,7 +1,9 @@
+'use client'
+
 import { JavascriptLogo } from "@/assets/JavascriptLogo";
-import { ButtonStart } from "../components/ButtonStart";
+import { ButtonStart } from "./ButtonStart";
 import { useQuestionStore } from "@/store/questions";
-import { Game } from "./Game";
+import { Game } from "./principalContainer/Game";
 
 
 export const PrincipalContainer = () =>{
