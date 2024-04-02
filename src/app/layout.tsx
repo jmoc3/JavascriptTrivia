@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { SessionProviderComponent } from "./providers/SessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,9 @@ export default function RootLayout({
     <html lang="en" className="dark" suppressHydrationWarning={true}>
       <link rel="shortcut icon" href="/Logo.png" />
       <title>Triviajs</title>
-      <body className={inter.className}>{children}</body>
+      <SessionProviderComponent>
+        <body className={inter.className}>{children}</body>
+      </SessionProviderComponent>
     </html>
   );
 }

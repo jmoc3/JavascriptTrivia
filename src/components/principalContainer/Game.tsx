@@ -62,8 +62,8 @@ const Question = ({info}:{info:QuestionType}) => {
         <span className="select-none">{currentQuestion + 1}/{questions.length}</span>
         
         <div className="buttons flex items-center space-x-4">
-          <Button color="warning" variant="flat" onClick={resetHandler}>Restart</Button>  
-          <Button isIconOnly color="danger" variant="flat" onClick={nextHandler}>
+          <Button color="danger" variant="flat" onClick={resetHandler}>Restart</Button>  
+          <Button isIconOnly color="warning" variant="flat" onClick={nextHandler}>
             <GoChevronRight />
           </Button>    
         </div>

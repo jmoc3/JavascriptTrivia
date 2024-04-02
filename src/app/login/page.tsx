@@ -4,11 +4,16 @@ import { Card, Input, Button, Divider, Link, useDisclosure } from "@nextui-org/r
 import { GoogleLog } from "@/assets/GoogleLogo";
 import { SignUpModal } from "@/components/login/SignUpModal";
 import { GoMoveToStart } from "react-icons/go";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 const LogIn = () => {
 
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const {data: session} = useSession()
+
+  if (session!=undefined) {
+    window.location.href="http://localhost:3000"
+  }
 
   return(
     <div className="screen flex items-center justify-center w-full h-screen">
@@ -34,7 +39,7 @@ const LogIn = () => {
         </form>
         <Divider />
 
-        <Button startContent={<GoogleLog />} className="bg-white gap-[1rem] py-[1.8rem] w-3/4" onClick={()=>signIn()}>
+        <Button startContent={<GoogleLog />} className="bg-white gap-[1rem] py-[1.8rem] w-3/4" onClick={()=>signIn('google',{callbackUrl:'/'})}>
           <span className="text-black">Sign With Google</span>
         </Button>
       </Card>
