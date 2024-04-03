@@ -21,17 +21,18 @@ export const Header = () => {
             <Avatar
               isBordered
               color="secondary"
-              name={session.user!.name!}
+              name={session.user?.name || 'Juanch@'}
               size="md"
-              src={session.user!.image!}
+              src={session.user!.image || "https://cdn.icon-icons.com/icons2/2468/PNG/512/user_icon_149329.png"}
+              className="p-2"
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat" className="p-4" >
             <DropdownItem key="profile" className="h-14 gap-2" isDisabled={true} textValue='userData'	>
-              <p className="text-sm font-semibold">{session.user!.name!}</p>
+              <p className="text-sm font-semibold">{session.user!.name || 'Juanch@'}</p>
               <p className="text-xs ">{session.user!.email!}</p>
             </DropdownItem>
-            <DropdownItem key="logout" color="danger" className="text-center" onClick={()=>signOut()}>
+            <DropdownItem key="logout" color="danger" className="text-center" onClick={()=>signOut({callbackUrl:'/'})}>
               Log Out
             </DropdownItem>
           </DropdownMenu>

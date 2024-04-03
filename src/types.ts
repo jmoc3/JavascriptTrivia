@@ -9,4 +9,6 @@ type Question = {
   isCorrectUserAnswer?:boolean
 }
 
-export type { Question }
+type Credentials = { [key:string]:string }
+
+export type { Question, Credentials }
