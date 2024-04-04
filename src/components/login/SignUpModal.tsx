@@ -14,7 +14,11 @@ export const SignUpModal = ({isOpen, onOpenChange}:{isOpen:boolean, onOpenChange
     axios.post('/api/auth/register',
     { name:formData.name,
       email:formData.email,
-      password:formData.password }).then(res=>console.log(res.data))
+      password:formData.password }).catch((err):void=>{
+        console.log(err.toJson(),'arroz printeamo algo cabron')
+      })
+
+    
     
   }
 
