@@ -20,7 +20,7 @@ export default function RootLayout({
       <link rel="shortcut icon" href="/Logo.png" />
       <title>Triviajs</title>
       <SessionProviderComponent>
-        <body className={inter.className}>{children}</body>
+        <body className={`${inter.className} overflow-hidden`}>{children}</body>
       </SessionProviderComponent>
     </html>
   );

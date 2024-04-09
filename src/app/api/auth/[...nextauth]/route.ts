@@ -1,7 +1,8 @@
-import NextAuth from 'next-auth'
+import NextAuth, { User } from 'next-auth'
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials";
-
+import db from "@/libs/db"
+import { NextResponse } from 'next/server';
  
 const handler = NextAuth({
   providers: [
@@ -15,16 +16,30 @@ const handler = NextAuth({
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" }
       },
-      async authorize(credentials, req) {
+      async authorize(credentials,req) {
         console.log(credentials)
-        // Add logic here to look up the user from the credentials supplied
-        const user = { id: "1", email: credentials!.email, password: credentials!.password }
+        
+        try {
+          const userFound = await db.user.findUnique({
+            where:{
+              email:credentials!.email
+            }
+          })
 
-        if (user) {
-          return user
-        } else {
-          return null
+          console.log(userFound)
+          if(userFound==null){
+            return NextResponse.json({message:"User doesn't exist"})
+          }
+  
+          if (credentials?.password == userFound!.password){
+            return NextResponse.json({message:"Incorrect Password"})
+          }
+          
+        } catch (error) {
+          console.log(error)
         }
+
+        return credentials as any
       }
     })],
     callbacks:{

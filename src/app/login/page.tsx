@@ -8,6 +8,7 @@ import { signIn, useSession } from "next-auth/react";
 import { inputHandler } from "@/services/inputHandler";
 import { useState } from "react";
 import axios from "axios";
+import Notify from "@/services/Notify";
 
 const LogIn = () => {
   
@@ -16,9 +17,9 @@ const LogIn = () => {
 
   const handleSubmit:React.FormEventHandler<HTMLFormElement> = async(e) => {
     e.preventDefault()
-
-    const response = await axios.post('/api/auth/login',credentials)
-    console.log(response)
+    const res = await signIn('credentials',{...credentials,redirect:false})
+    console.log(res)
+    if (res!.error==null) Notify({message:"User doesn't exist",backgroundColor:'#441729',color:'#F53859',extraStyles:{zIndex:'60'}})
   }
 
   const [isVisible, setIsVisible] = useState(false);
