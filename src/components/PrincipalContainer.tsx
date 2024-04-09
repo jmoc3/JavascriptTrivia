@@ -6,9 +6,11 @@ import { Game } from "./principalContainer/Game";
 import { Progress } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
 
+
 export const PrincipalContainer = () =>{
-  const {data:session} = useSession()
+
   const {questions} = useQuestionStore()
+  const {data:session}=useSession()
   console.log(session)
   return (
     <div className="container flex flex-col items-center gap-16 ">

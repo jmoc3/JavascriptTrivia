@@ -1,9 +1,9 @@
-import NextAuth, { User } from 'next-auth'
+import NextAuth from 'next-auth'
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials";
 import db from "@/libs/db"
-import { NextResponse } from 'next/server';
- 
+import bcrypt from 'bcrypt'
+
 const handler = NextAuth({
   providers: [
     GoogleProvider({
@@ -16,30 +16,28 @@ const handler = NextAuth({
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" }
       },
-      async authorize(credentials,req) {
-        console.log(credentials)
+      async authorize(credentials) {
+
+        const userFound = await db.user.findUnique({
+          where:{
+            email:credentials!.email
+          }
+        })
+
+        if (!userFound) throw new Error('No user Founded')
         
-        try {
-          const userFound = await db.user.findUnique({
-            where:{
-              email:credentials!.email
-            }
-          })
+        const matchPassword = await bcrypt.compare(credentials!.password, userFound.password )
+        
+        if(!matchPassword) throw new Error('Wrong Password')
+      
+        
 
-          console.log(userFound)
-          if(userFound==null){
-            return NextResponse.json({message:"User doesn't exist"})
-          }
-  
-          if (credentials?.password == userFound!.password){
-            return NextResponse.json({message:"Incorrect Password"})
-          }
-          
-        } catch (error) {
-          console.log(error)
-        }
-
-        return credentials as any
+        return {
+          id:userFound.id,
+          name:userFound.name,
+          email:userFound.email
+        } as any
+       
       }
     })],
     callbacks:{
@@ -50,7 +48,11 @@ const handler = NextAuth({
         session.user = token as any
         return session
       }
-    }
-})
+    },
+    pages:{
+      signIn: "/login"
+    },
+    session: { strategy: "jwt" }
+  })
 
 export { handler as GET, handler as POST }

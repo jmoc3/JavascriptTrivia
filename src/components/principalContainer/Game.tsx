@@ -18,6 +18,8 @@ const Question = ({info}:{info:QuestionType}) => {
           fetchQuestions,
           } = useQuestionStore()
 
+  
+
   const handler = (index:number) => () => {
     selectAnswer(info.id,index)
     setCheck(info.answers[info.correctAnswer])
@@ -27,6 +29,7 @@ const Question = ({info}:{info:QuestionType}) => {
     if(info.userSelectedAnswer!=undefined) goNextQuestion() 
   }
   const resetHandler = () => {
+
     fetchQuestions(10)
     setCheck('')
   }

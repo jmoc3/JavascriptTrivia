@@ -24,7 +24,7 @@ export const Header = () => {
               name={session.user?.name || 'Juanch@'}
               size="md"
               src={session.user!.image || "https://cdn.icon-icons.com/icons2/2468/PNG/512/user_icon_149329.png"}
-              className="p-2"
+              className=""
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat" className="p-4" >

@@ -4,22 +4,24 @@ import { Card, Input, Button, Divider, Link, useDisclosure } from "@nextui-org/r
 import { GoogleLog } from "@/assets/GoogleLogo";
 import { SignUpModal } from "@/components/login/SignUpModal";
 import { GoMoveToStart, GoEye , GoEyeClosed } from "react-icons/go";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { inputHandler } from "@/services/inputHandler";
 import { useState } from "react";
-import axios from "axios";
+import { useRouter } from 'next/navigation';
 import Notify from "@/services/Notify";
 
 const LogIn = () => {
   
   const [credentials, setCredentials] = useState<Record<string,string>>({})  
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const router = useRouter()
 
   const handleSubmit:React.FormEventHandler<HTMLFormElement> = async(e) => {
     e.preventDefault()
-    const res = await signIn('credentials',{...credentials,redirect:false})
-    console.log(res)
-    if (res!.error==null) Notify({message:"User doesn't exist",backgroundColor:'#441729',color:'#F53859',extraStyles:{zIndex:'60'}})
+    const res =  await signIn('credentials',{...credentials,redirect:false})
+    if (res!.error) return Notify({message:res!.error,backgroundColor:'#441729',color:'#F53859',extraStyles:{zIndex:'60'}})
+
+    router.push('/')
   }
 
   const [isVisible, setIsVisible] = useState(false);

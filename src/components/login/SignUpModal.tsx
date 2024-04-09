@@ -13,7 +13,8 @@ export const SignUpModal = ({isOpen, onOpenChange}:{isOpen:boolean, onOpenChange
     if (formData.password!=formData.confirmPassword) return alert('The passwords has to be the same')
     
     try {
-      const res = await axios.post('/api/auth/register',
+
+      await axios.post('/api/auth/register',
       { name:formData.name,
         email:formData.email,
         password:formData.password })
