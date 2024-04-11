@@ -3,6 +3,8 @@ import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials";
 import db from "@/libs/db"
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+
 
 const handler = NextAuth({
   providers: [
@@ -30,12 +32,18 @@ const handler = NextAuth({
         
         if(!matchPassword) throw new Error('Wrong Password')
       
-        
+        const token = jwt.sign({
+          exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30,
+          email:userFound.email,
+          name:userFound.name
+        },process.env.SECRET as string)
 
+        
         return {
           id:userFound.id,
           name:userFound.name,
-          email:userFound.email
+          email:userFound.email,
+          accessToken:token
         } as any
        
       }
@@ -51,8 +59,7 @@ const handler = NextAuth({
     },
     pages:{
       signIn: "/login"
-    },
-    session: { strategy: "jwt" }
+    }
   })
 
 export { handler as GET, handler as POST }

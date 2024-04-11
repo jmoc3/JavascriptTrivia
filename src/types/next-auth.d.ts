@@ -6,7 +6,7 @@ declare module "next-auth" {
       name?:string;
       image?:string;
       email:string;
-      token:string;
+      accessToken:string;
     }
   }
 }
