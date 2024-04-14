@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { Question } from "../types";
+import type { Question } from "../types/types";
 import { persist } from "zustand/middleware";
 
 type State = {

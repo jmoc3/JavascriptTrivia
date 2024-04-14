@@ -1,4 +1,4 @@
-import { Question } from "@/types";
+import { Question } from "@/types/types";
 import {Accordion, AccordionItem} from "@nextui-org/react";
 
 export const ExplanationComponent = ({info}:{info:Question}) => {

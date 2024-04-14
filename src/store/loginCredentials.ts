@@ -1,5 +1,5 @@
 import {create} from "zustand";
-import type { LoginCredentials } from "@/types";
+import type { Credentials as LoginCredentials } from "@/types/types";
 
 type State = {
   credentials:LoginCredentials 

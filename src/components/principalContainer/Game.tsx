@@ -1,5 +1,5 @@
 import { useQuestionStore } from "@/store/questions"
-import type { Question as QuestionType } from "@/types"
+import type { Question as QuestionType } from "@/types/types"
 import { Card, Listbox, ListboxItem, Button } from "@nextui-org/react"
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { hybrid } from 'react-syntax-highlighter/dist/esm/styles/hljs'

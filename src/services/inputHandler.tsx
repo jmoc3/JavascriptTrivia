@@ -1,4 +1,4 @@
-import type { Credentials } from "@/types"
+import type { Credentials } from "@/types/types"
 
 export const inputHandler = (e:React.ChangeEvent<HTMLInputElement>,credentials:Credentials, setCredentials:(userCredentials:Credentials)=>void) => {
   const input = e.target as HTMLInputElement
