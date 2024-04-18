@@ -9,7 +9,6 @@ import { Progress } from "@nextui-org/react";
 export const PrincipalContainer = () =>{
   
   const {questions} = useQuestionStore()
-  console.log('a')
   
   return (
     <div className="container flex flex-col items-center gap-16 ">
