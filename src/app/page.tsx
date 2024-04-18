@@ -1,9 +1,9 @@
 import NextProviderComponent from "./providers/NextProvider";
 import { Header } from "@/components/Header";
 import { PrincipalContainer } from "@/components/PrincipalContainer";
+import { useQuestionStore } from "@/store/questions";
 
 export default function Home() {
-  
   return (
     <NextProviderComponent>
         <Header />

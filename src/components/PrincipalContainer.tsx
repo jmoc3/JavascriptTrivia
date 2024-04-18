@@ -4,15 +4,12 @@ import { JavascriptLogo } from "@/assets/JavascriptLogo";
 import { useQuestionStore } from "@/store/questions";
 import { Game } from "./principalContainer/Game";
 import { Progress } from "@nextui-org/react";
-import { useSession } from "next-auth/react";
 
 
 export const PrincipalContainer = () =>{
-
-  const {questions, fetchQuestions} = useQuestionStore()
-  const {data:session}=useSession()
-
-  fetchQuestions(10)
+  
+  const {questions} = useQuestionStore()
+  console.log('a')
   
   return (
     <div className="container flex flex-col items-center gap-16 ">
