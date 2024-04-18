@@ -9,9 +9,11 @@ import { useSession } from "next-auth/react";
 
 export const PrincipalContainer = () =>{
 
-  const {questions} = useQuestionStore()
+  const {questions, fetchQuestions} = useQuestionStore()
   const {data:session}=useSession()
-  console.log(session)
+
+  fetchQuestions(10)
+  
   return (
     <div className="container flex flex-col items-center gap-16 ">
       <div className="stack flex gap-5">
