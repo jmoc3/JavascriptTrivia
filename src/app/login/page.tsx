@@ -62,7 +62,7 @@ const LogIn = () => {
         </form>
         <Divider />
 
-        <Button startContent={<GoogleLog />} className="bg-white gap-[1rem] py-[1.8rem] w-3/4" onClick={(e)=>{e.preventDefault();signIn('google',{callbackUrl:'/'})}}>
+        <Button startContent={<GoogleLog />} className="bg-white gap-[1rem] py-[1.8rem] w-3/4" onClick={()=>{signIn('google',{callbackUrl:'/'})}}>
           <span className="text-black">Sign With Google</span>
         </Button>
       </Card>
