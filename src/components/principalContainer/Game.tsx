@@ -18,8 +18,6 @@ const Question = ({info}:{info:QuestionType}) => {
           fetchQuestions,
           } = useQuestionStore()
 
-  
-
   const handler = (index:number) => () => {
     selectAnswer(info.id,index)
     setCheck(info.answers[info.correctAnswer])
