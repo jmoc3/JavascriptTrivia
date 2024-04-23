@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import type { Question } from "../types/types";
-import { persist } from "zustand/middleware";
 
 type State = {
   questions: Question[],
@@ -15,7 +14,7 @@ type Actions = {
   goNextQuestion: ()=>void,
 }
 
-export const useQuestionStore = create<State & Actions>()(persist((set,get)=>({
+export const useQuestionStore = create<State & Actions>()((set,get)=>({
   questions: [],
   currentQuestion: 0,
   userSelect:[],
@@ -50,7 +49,4 @@ export const useQuestionStore = create<State & Actions>()(persist((set,get)=>({
 
     set({currentQuestion:nextQuestion})
   }
-  }), {
-  name:'questions'
-  }
-))  
+  }))  

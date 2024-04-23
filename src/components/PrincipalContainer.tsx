@@ -4,12 +4,16 @@ import { JavascriptLogo } from "@/assets/JavascriptLogo";
 import { useQuestionStore } from "@/store/questions";
 import { Game } from "./principalContainer/Game";
 import { Progress } from "@nextui-org/react";
-
+import { useEffect } from "react";
 
 export const PrincipalContainer = () =>{
   
-  const {questions} = useQuestionStore()
+  const {questions, fetchQuestions} = useQuestionStore()
   
+  useEffect(()=>{
+    fetchQuestions(10)
+  },[])
+
   return (
     <div className="container flex flex-col items-center gap-16 ">
       <div className="stack flex gap-5">
